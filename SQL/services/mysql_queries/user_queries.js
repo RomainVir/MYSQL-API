@@ -6,7 +6,7 @@ import md5 from "md5";
 
 const userQueries = {};
 
-userQueries.getUser = async (email) => {
+userQueries.getUserByEmail = async (email) => {
   // Conectamos con la base de datos y buscamos si existe el usuario por el email.
   let conn = null;
   try {
@@ -36,9 +36,10 @@ userQueries.addUser = async (userData) => {
       surname: userData.surname,
       email: userData.email,
       password: md5(userData.password),
-      ts_Alta: moment().format("YYYY-MM-DD HH:mm:ss"),
+      tsAlta: moment().format("YYYY-MM-DD HH:mm:ss"),
+      role: userData.role,
     };
-    return await db.query("INSERT INTO users SET ?", userObj, "insert", conn);
+    return await db.query("INSERT INTO usuario SET ?", userObj, "insert", conn);
   } catch (e) {
     throw new Error(e);
   } finally {
