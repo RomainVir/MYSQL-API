@@ -52,7 +52,7 @@ controller.loginUser = async (req, res) => {
     const jwtConstructor = new SignJWT({
       id: user.id,
       email,
-      role: user.user_rol,
+      role: user.role,
     });
 
     // Codificamos el la clave secreta definida en la variable de entorno por requisito de la librería jose
@@ -89,10 +89,11 @@ controller.deleteUser = async (req, res) => {
       encoder.encode(process.env.JWT_SECRET)
     );
     // Verificamos que seamos usuario administrador
+    console.log(payload.role);
     if (!payload.role)
       return res.status(409).send("no tiene permiso de administrador");
     // Buscamos si el id del usuario existe en la base de datos
-    const user = await dao.getUserbyId(req.params.id);
+    const user = await dao.getUserById(req.params.id);
     // Si no existe devolvemos un 404 (not found)
     if (user.length <= 0) return res.status(404).send("el usuario no existe");
     // Si existe, eliminamos el usuario por el id
