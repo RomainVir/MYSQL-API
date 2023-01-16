@@ -12,7 +12,7 @@ userRouter.post("/login", userController.loginUser);
 //delete an user con el id
 userRouter.delete("/:id", userController.deleteUser);
 
-//modificar un uasuario con el id
-userRouter.patch("/:id", userController.updateUser)
+//modificar un usuario con el id
+userRouter.patch("/:id", userController.updateUser);
 
 export default userRouter;
