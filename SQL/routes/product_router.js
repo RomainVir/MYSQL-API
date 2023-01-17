@@ -7,4 +7,7 @@ const productRouter = express.Router();
 
 productRouter.post("/upload", productController.uploadImage);
 
+// Obtener una imagen por su id
+productRouter.get("/image/:id", productController.getImage);
+
 export default productRouter;

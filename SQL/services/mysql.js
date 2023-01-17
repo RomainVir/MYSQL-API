@@ -1,6 +1,7 @@
 //Archivo de configuración de mysql
 import mysql from "mysql2";
 
+
 let db = {};
 // Create connection
 db.createConnection = async () => {
@@ -56,5 +57,7 @@ db.query = async (sqlQuery, params, type, conn) => {
     }
   })
 }
+
+
 
 export default db;

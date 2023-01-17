@@ -33,12 +33,11 @@ userQueries.addUser = async (userData) => {
     // Creamos un objeto con los datos del usuario a guardar en la base de datos.
     // Encriptamos la password con md5 y usamos la libreria momentjs para registrar la fecha actual
     let userObj = {
-      name: userData.Name,
-      surname: userData.Surname,
-      email: userData.Email,
-      Password: md5(userData.Password),
+      name: userData.name,
+      surname: userData.surname,
+      email: userData.email,
+      Password: md5(userData.password),
       tsAlta: moment().format("YYYY-MM-DD HH:mm:ss"),
-      role: userData.role,
     };
     return await db.query("INSERT INTO usuario SET ?", userObj, "insert", conn);
   } catch (e) {

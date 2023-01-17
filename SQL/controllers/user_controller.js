@@ -45,7 +45,7 @@ controller.loginUser = async (req, res) => {
     console.log(user);
     console.log(clienPassword);
     // Si existe el usuario, comprobamos que la password es correcta. Si no lo es devolvemos un 401 (unathorized)
-    if (user.Password !== clienPassword)
+    if (user.password !== clienPassword)
       return res.status(401).send("password incorrecta");
     // Si es correcta generamos el token y lo devolvemos al cliente
     // Construimos el JWT con el id, email y rol del usuario

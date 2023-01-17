@@ -2,7 +2,7 @@
 //funciones que vamos a utilizar, una para buscar si un usuario ya está registrado y otra para insertar un nuevo usuario en la base de datos.
 
 import userQueries from "./mysql_queries/user_queries.js";
-
+import productQueries from "./mysql_queries/product_queries.js";
 const dao = {};
 
 // Buscar un usuario por el email
@@ -19,6 +19,12 @@ dao.deleteUser = async (id) => await userQueries.deleteUser(id);
 // Modificar usuario por su id
 dao.updateUser = async (id, userData) =>
   await userQueries.updateUser(id, userData);
+
+// Añadir datos de la imagen subida al servidor
+dao.addImage = async (imageData) => await productQueries.addImage(imageData);
+
+// Obtener una imagen por su id
+dao.getImageById = async (id) => await productQueries.getImageById(id);
 
 export default dao;
 
