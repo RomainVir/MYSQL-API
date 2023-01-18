@@ -54,4 +54,6 @@ controller.getImage = async (req, res) => {
   }
 };
 
+controller.addProduct = async(req, res) => {}
+
 export default controller;

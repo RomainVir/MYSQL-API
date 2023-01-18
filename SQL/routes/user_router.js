@@ -1,5 +1,6 @@
 import express from "express";
 import userController from "../controllers/user_controller.js";
+import validateLoginDto from "../utils/validate_login_dto.js";
 
 const userRouter = express.Router();
 
@@ -7,7 +8,7 @@ const userRouter = express.Router();
 userRouter.post("/", userController.addUser);
 
 // Login de un usuario
-userRouter.post("/login", userController.loginUser);
+userRouter.post("/login", validateLoginDto, userController.loginUser);
 
 //delete an user con el id
 userRouter.delete("/:id", userController.deleteUser);

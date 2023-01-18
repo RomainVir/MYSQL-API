@@ -45,4 +45,8 @@ productQueries.getImageById = async (id) => {
   }
 };
 
+
+productQueries.insertProduct = async (productData) =>{}
+
+
 export default productQueries;
