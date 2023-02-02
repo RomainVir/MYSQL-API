@@ -5,7 +5,7 @@ import validateLoginDto from "../utils/validate_login_dto.js";
 const userRouter = express.Router();
 
 //registro de nuevo usuario
-userRouter.post("/", userController.addUser);
+userRouter.post("/register", userController.addUser);
 
 // Login de un usuario
 userRouter.post("/login", validateLoginDto, userController.loginUser);

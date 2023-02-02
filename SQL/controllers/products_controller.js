@@ -24,7 +24,7 @@ controller.uploadImage = async (req, res) => {
     images.forEach(async (image) => {
       // Ya podemos acceder a las propiedades del objeto image.
       // Obtenemos la ruta de la imagen.
-      let uploadPath = __dirname + "/public/images/products/" + image.name;
+      let uploadPath = "/public/images/products/" + image.name;
       // Usamos el método mv() para ubicar el archivo en nuestro servidor
       image.mv(uploadPath, (err) => {
         if (err) return res.status(500).send(err);
@@ -54,6 +54,26 @@ controller.getImage = async (req, res) => {
   }
 };
 
-controller.addProduct = async(req, res) => {}
+controller.addProduct = async (req, res) => {
+  // controlar que viene el body
+  if (!req.body) return res.status(400).send("Error al recibir el body");
+  // buscamos si existe el producto por referencia
+  const product = await dao.getProductByRef(req.body.reference);
+  //si existe devolvemos 409
+  if (product.length > 1) return res.status(409).send("Product already exists");
+  // añadir producto => creamos query para añadir producto (insert), creamos el dao
+  const productData = {
+    precio: req.body.precio,
+    nombre: req.body.nombre,
+    description: req.body.description,
+  };
+
+  const addProduct = await dao.addProduct(productData);
+  if (addProduct) res.send(("id_product", addProduct));
+  // nos devuelve el id del produco
+  // utilizamos la libreria express-upload para subir imagen
+  //añadimos el path a la tabla imagen y el id obtenido del producto
+  //devolvemos la respuesta OK
+};
 
 export default controller;
